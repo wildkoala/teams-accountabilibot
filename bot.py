@@ -19,6 +19,10 @@ class MyBot(ActivityHandler):
 
     async def on_message_activity(self, turn_context: TurnContext):
         print("[+] In on_message")
+        text = turn_context.activity.text.strip().lower()
+        await self._get_member(turn_context)
+        return
+        '''
         IN_CHANNEL = await TeamsInfo.get_members(turn_context)
 
         text = turn_context.activity.text.strip().lower()
@@ -41,6 +45,7 @@ class MyBot(ActivityHandler):
             RED.append(member)
             return
         #await turn_context.send_activity("Got your status, thank you!")
+        '''
 
     async def on_members_added_activity(
         self,
@@ -51,6 +56,7 @@ class MyBot(ActivityHandler):
             if member_added.id != turn_context.activity.recipient.id:
                 await turn_context.send_activity("Hello and welcome!")
 
+    '''
     async def _get_member(self, turn_context: TurnContext):
         print("[+] In get_member")
         TeamsChannelAccount: member = None
@@ -66,6 +72,21 @@ class MyBot(ActivityHandler):
         else:
             await turn_context.send_activity(f"You are: {member.name}")
             return member.name
+    '''
+
+    async def _get_member(self, turn_context: TurnContext):
+        TeamsChannelAccount: member = None
+        try:
+            member = await TeamsInfo.get_member(
+                turn_context, turn_context.activity.from_property.id
+            )
+        except Exception as e:
+            if "MemberNotFoundInConversation" in e.args[0]:
+                await turn_context.send_activity("Member not found.")
+            else:
+                raise
+        else:
+            await turn_context.send_activity(f"You are: {member.name}")
 
 # Things to do
 # Find a way to get all the users in a channel into a python list

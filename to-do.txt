@@ -3,3 +3,9 @@
 1. Change our bot's scope to "teams" (we could use "groupchat" scope for the G31 Lt's chat for food fight)
 2. Fix emulator issue: https://github.com/microsoft/BotBuilder-Samples/issues/2320
 3. Make a mock team then? Or try to deploy an echo bot to a team that we make tomorrow?
+
+
+# Research locations:
+
+https://github.com/microsoft/BotBuilder-Samples/blob/d46e102b3086ba1f8e799d4e568456a4a0339fe5/samples/python/57.teams-conversation-bot/bots/teams_conversation_bot.py#L119
+* Go under the 
