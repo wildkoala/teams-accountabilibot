@@ -29,16 +29,18 @@ class MyBot(ActivityHandler):
         if "red" in text:
             print("[-] Oh shiddd, someone got the rona, appending you to the red list")
             RED.append(member)
+            return
         
         if "amber" in text or "yellow" in text:
             print("[-] You're probably fine but *playing it safe*, yeah, okay. Added to AMBER list")
             RED.append(member)
+            return
 
         if "green" in text:
             print("[+] Cool, see you at work! Adding to to green list")
             RED.append(member)
-
-        await turn_context.send_activity("Got your status, thank you!")
+            return
+        #await turn_context.send_activity("Got your status, thank you!")
 
     async def on_members_added_activity(
         self,
@@ -62,8 +64,8 @@ class MyBot(ActivityHandler):
             else:
                 raise
         else:
+            await turn_context.send_activity(f"You are: {member.name}")
             return member.name
-            #await turn_context.send_activity(f"You are: {member.name}")
 
 # Things to do
 # Find a way to get all the users in a channel into a python list

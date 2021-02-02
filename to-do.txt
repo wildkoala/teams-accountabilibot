@@ -1,3 +1,5 @@
 # To Do List
 
 1. Change our bot's scope to "teams" (we could use "groupchat" scope for the G31 Lt's chat for food fight)
+2. Fix emulator issue: https://github.com/microsoft/BotBuilder-Samples/issues/2320
+3. Make a mock team then? Or try to deploy an echo bot to a team that we make tomorrow?
