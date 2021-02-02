@@ -4,6 +4,7 @@
 import sys
 import traceback
 from datetime import datetime
+import json
 
 from aiohttp import web
 from aiohttp.web import Request, Response, json_response
@@ -17,6 +18,7 @@ from botbuilder.schema import Activity, ActivityTypes
 
 from bot import MyBot
 from config import DefaultConfig
+
 
 CONFIG = DefaultConfig()
 
@@ -68,7 +70,10 @@ async def messages(req: Request) -> Response:
     else:
         return Response(status=415)
 
+    print(json.dumps(body, sort_keys=True, indent=4))
     activity = Activity().deserialize(body)
+    #print(activity)
+    # I think i want the message activity??? If it's a message I want the username of who it is.
     auth_header = req.headers["Authorization"] if "Authorization" in req.headers else ""
 
     response = await ADAPTER.process_activity(activity, auth_header, BOT.on_turn)

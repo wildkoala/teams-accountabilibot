@@ -1,0 +1,3 @@
+# To Do List
+
+1. Change our bot's scope to "teams" (we could use "groupchat" scope for the G31 Lt's chat for food fight)
